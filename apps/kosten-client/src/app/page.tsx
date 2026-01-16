@@ -36,10 +36,12 @@ export default function Home() {
             Track expenses, manage budgets, and gain insights into your spending habits with our simple and intuitive expense tracker.
           </p>
 
-          <Button variant="link" className="text-2xl">
-            <p>Get Started</p>
-            <ArrowRight />
-          </Button>
+          <Link href="/auth/signup">
+            <Button variant="link" className="text-2xl">
+              <p>Get Started</p>
+              <ArrowRight />
+            </Button>
+          </Link>
         </div>
 
         {/* Features List */}
