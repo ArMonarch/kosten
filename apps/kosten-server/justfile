@@ -1,0 +1,7 @@
+host:= 'frenzfries'
+
+build:
+  mvn clean package
+
+run version: build
+  java -jar target/kotsen-{{version}}-SNAPSHOT.jar

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>armonarch</groupId>
 	<artifactId>kotsen</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>kotsen</name>
 	<description>Expense Tracker REST Server (feat. Spring Bot)</description>
 	<url/>

@@ -25,6 +25,7 @@
           in
             with pkgs; [
               jdk
+              just
               (
                 maven.override
                 {jdk_headless = jdk;}
