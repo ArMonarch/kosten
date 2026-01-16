@@ -1,11 +1,11 @@
-package armonarch.kotsen;
+package armonarch.kosten;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KotsenApplication {
+public class KostenApplication {
   public static void main(String[] args) {
-    SpringApplication.run(KotsenApplication.class, args);
+    SpringApplication.run(KostenApplication.class, args);
   }
 }

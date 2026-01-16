@@ -1,13 +1,13 @@
-package armonarch.kotsen;
+package armonarch.kosten;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KotsenApplicationTests {
+class KostenApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+  @Test
+  void contextLoads() {
+  }
 
 }

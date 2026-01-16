@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>armonarch</groupId>
-	<artifactId>kotsen</artifactId>
+	<artifactId>kosten</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-	<name>kotsen</name>
+	<name>kosten</name>
 	<description>Expense Tracker REST Server (feat. Spring Bot)</description>
 	<url/>
 	<licenses>

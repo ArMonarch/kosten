@@ -4,4 +4,4 @@ build:
   mvn clean package
 
 run version: build
-  java -jar target/kotsen-{{version}}-SNAPSHOT.jar
+  java -jar target/kosten-{{version}}-SNAPSHOT.jar
