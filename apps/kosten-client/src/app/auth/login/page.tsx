@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/Card";
 import { Base } from "@/components/form/common/base";
-import { FormDescription } from "@/components/form/common/description";
 import { Footer } from "@/components/form/common/footer";
 import { FormTitle } from "@/components/form/common/title";
 import { LoginForm } from "@/components/form/login/form";
