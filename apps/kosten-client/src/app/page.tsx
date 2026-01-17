@@ -11,7 +11,7 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <WalletMinimal className="w-8 h-8 text-primary" />
-            <span className="text-2xl font-bold text-black"><Link href="/">ExpenseTrack</Link></span>
+            <span className="text-2xl font-bold text-black"><Link href="/">Kosten</Link></span>
           </div>
           <div className="flex items-center">
             <Link href="/auth/login">
