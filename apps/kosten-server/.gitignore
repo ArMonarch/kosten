@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Postgresql database cluster ###
+database/kosten
+database/logfile

@@ -25,7 +25,7 @@
           in
             with pkgs; [
               jdk
-              just
+              postgresql
               (
                 maven.override
                 {jdk_headless = jdk;}
@@ -34,6 +34,7 @@
           shellHook = ''
             echo "Initialized Java Development Environment"
             echo "  ├── javac: $(javac --version)"
+            echo "  ├── postgres: $(postgres --version)"
             echo "  ├── java:"
             java --version | while read line; do echo "  │   - $line"; done
             echo "  └── maven:"
