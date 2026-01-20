@@ -1,4 +1,4 @@
-import { CardFooter } from "@/components/Card";
+import { CardFooter } from "@/components/card";
 import Link from "next/link";
 
 function Footer({ varient }: { varient: "login" | "signup" }) {

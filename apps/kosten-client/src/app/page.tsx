@@ -1,5 +1,5 @@
-import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
+import { Button } from "@/components/button";
+import { Card } from "@/components/card";
 import { ArrowRight, PieChart, WalletMinimal } from "lucide-react";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ export default function Home() {
             <Link href="/auth/login">
               <Button variant="outline" size="default" className="rounded-l-xl hover:bg-primary!">Login</Button>
             </Link>
-            <Link href="/auth/login">
+            <Link href="/auth/signup">
               <Button variant="outline" size="default" className="rounded-r-xl hover:bg-primary!">Sign Up</Button>
             </Link>
           </div>

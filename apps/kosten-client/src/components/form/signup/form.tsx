@@ -1,12 +1,14 @@
 "use client";
-import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
+import { Button } from "@/components/button";
+import { Input } from "@/components/input";
 import { useUserStore } from "@/store/user";
+import { ApiResponse } from "@/types/response";
 import { SignUpForm, SignUpFormError } from "@/types/signupForm";
 import { User } from "@/types/user";
 import { Label } from "@radix-ui/react-label";
 import axios from "axios";
-import { ChangeEventHandler, FocusEventHandler, MouseEventHandler, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 
 type InputChangeHandler = ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
 type ButtonHandler = MouseEventHandler<HTMLButtonElement>;
@@ -17,33 +19,27 @@ function Form() {
   const [loading, setloading] = useState<boolean>(false);
   const [error, seterror] = useState<string | null>(null);
   const login = useUserStore((state) => (state.login));
+  const router = useRouter();
 
   const handleinput: InputChangeHandler = (event) => {
     const { name, value } = event.target;
     update_signupForm((prev) => ({ ...prev, [name]: value }));
-    handleValidation(name, value);
-  };
-  const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
-    const { name, value } = event.target;
-    handleValidation(name, value);
-
   };
   const handleSubmit: ButtonHandler = async (event) => {
     event.preventDefault();
-    Object.entries(signupForm).forEach(([name, value]) => {
-      handleValidation(name, value);
-      if (name == "confirmPassword" && value != signupForm.password) return;
-    });
-    if (signupFormError.name || signupFormError.email || signupFormError.password) return;
 
     setloading(true);
     try {
-      const response = await axios.post<User>("http://127.0.0.1:8080/api/auth/signup", {
+      const response = await axios.post<ApiResponse<User>>("http://127.0.0.1:8080/api/auth/signup", {
         email: signupForm.email,
         name: signupForm.name,
         password: signupForm.password,
       });
-      login(response.data);
+      update_signupFormError({ email: null, name: null, password: null });
+      seterror(null)
+
+      login(response.data.data);
+      router.replace("/dashboard/dashboard");
     }
     catch (err) {
       if (axios.isAxiosError(err)) {
@@ -55,8 +51,13 @@ function Form() {
               seterror(err.response?.data?.message);
               update_signupFormError((prev) => ({ ...prev, ...err.response?.data?.errors }));
               break;
+            case 401:
+              seterror(err.response?.data?.message);
+              update_signupFormError((prev) => ({ ...prev, ...err.response?.data?.errors }));
+              break;
             case 409:
               seterror(err.response?.data?.message);
+              update_signupFormError({ email: null, name: null, password: null });
               break;
             default:
               seterror("Server error. Please try again later.");
@@ -68,37 +69,6 @@ function Form() {
     }
     setloading(false);
   };
-
-  function handleValidation(name: string, value: string) {
-    seterror(null);
-    switch (name) {
-      case "name":
-        if (value.trim() === "")
-          update_signupFormError((prev) => ({ ...prev, "name": "Name must not be empty" }))
-        else if (value.length < 3 || 20 < value.length)
-          update_signupFormError((prev) => ({ ...prev, "name": "Name must be 3 - 20 character long" }))
-        else update_signupFormError((prev) => ({ ...prev, "name": null }))
-        break
-
-      case "email":
-        if (value.trim() === "")
-          update_signupFormError((prev) => ({ ...prev, "email": "Email must not be enpty" }))
-        else if (value.length < 5)
-          update_signupFormError((prev) => ({ ...prev, "email": "Email must at least be 5 character long" }))
-        else update_signupFormError((prev) => ({ ...prev, "email": null }))
-        break
-
-      case "password":
-        if (value.trim() === "")
-          update_signupFormError((prev) => ({ ...prev, "password": "Password must not be empty" }))
-        else if (value.length < 8)
-          update_signupFormError((prev) => ({ ...prev, "password": "Password must at least be 8 long" }))
-        else update_signupFormError((prev) => ({ ...prev, "password": null }))
-        break
-      default:
-        break
-    }
-  }
 
   return (
     <form>
@@ -112,7 +82,6 @@ function Form() {
             placeholder="Foo Bar"
             value={signupForm.name}
             onChange={handleinput}
-            onBlur={handleBlur}
             required
           />
           <Label className="text-primary">{signupFormError.name ? signupFormError.name : null}</Label>
@@ -126,7 +95,6 @@ function Form() {
             placeholder="hello@example.com"
             value={signupForm.email}
             onChange={handleinput}
-            onBlur={handleBlur}
             required
           />
           <Label className="text-primary">{signupFormError.email ? signupFormError.email : null}</Label>
@@ -139,7 +107,6 @@ function Form() {
             type="password"
             value={signupForm.password}
             onChange={handleinput}
-            onBlur={handleBlur}
             required
           />
           <Label className="text-primary">{signupFormError.password ? signupFormError.password : null}</Label>
@@ -148,8 +115,7 @@ function Form() {
 
       <div className="grid gap-2 pt-7 px-5">
         <Label className="text-primary">{error ? error : null}</Label>
-        <Button variant="outline" className="rounded-xl hover:bg-primary!" type="button" onClick={handleSubmit}
-          disabled={error != null || signupFormError.name != null || signupFormError.email != null || signupFormError.password != null || loading == true}>Submit</Button>
+        <Button variant="outline" className="rounded-xl hover:bg-primary!" type="button" onClick={handleSubmit} disabled={loading}>Submit</Button>
       </div>
     </form>
   )

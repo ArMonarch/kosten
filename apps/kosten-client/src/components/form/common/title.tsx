@@ -1,4 +1,4 @@
-import { CardTitle } from "@/components/Card";
+import { CardTitle } from "@/components/card";
 import { WalletMinimal } from "lucide-react";
 import Link from "next/link";
 

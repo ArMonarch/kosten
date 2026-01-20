@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/Card";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/card";
 import { Base } from "@/components/form/common/base";
 import { Footer } from "@/components/form/common/footer";
 import { FormTitle } from "@/components/form/common/title";
