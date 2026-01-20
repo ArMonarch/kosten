@@ -5,6 +5,9 @@ Track expenses, manage budgets, and gain insights into your spending habits with
 - FrontEnd -> Typescript(Next.js)
 - BackEnd -> Java(Spring Boot)
 
+## Preview
+https://github.com/user-attachments/assets/934c7aa3-cab2-4f59-b2cc-2af524b0b3a5
+
 ## Project Structure
 ```
 ├──  apps # Contains all application-level source code for the project.
@@ -113,7 +116,7 @@ Build for production:
 bun run build
 ```
 #### Setup (with nix)
-Automatically install required dependencies and enable an shell the required dependencies added path,
+Automatically install required dependencies and drops you into an shell with the required dependencies installed and added to path temporarily,
 doesn't pollute your environment.
 ```bash
 nix develop
