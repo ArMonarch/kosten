@@ -97,3 +97,38 @@ Track expenses, manage budgets, and gain insights into your spending habits with
 └──  pom.xml # Maven build configuration, dependencies, and project metadata.
 ```
 
+## Installation
+### Client Installation
+#### Prerequisites
+- Bun (for package management and running the app)
+- (Optional) Nix (for reproducible development environment)
+#### Setup (without Nix)
+```bash
+cd apps/kosten-client
+bun install
+bun run dev
+```
+Build for production:
+```bash
+bun run build
+```
+#### Setup (with nix)
+Automatically install required dependencies and enable an shell the required dependencies added path,
+doesn't pollute your environment.
+```bash
+nix develop
+bun install
+bun run dev
+```
+
+### Server Installation
+#### Prerequisites
+- JDK 25
+- Maven
+- PostgreSQL (database created with valid username and password)
+Ensure the database credentials and connection URL are configured in `src/main/resources/application.properties`.
+```bash
+cd apps/kosten-server
+nix develop (if using nix)
+mvn spring-boot:run
+```
