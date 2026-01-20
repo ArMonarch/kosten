@@ -8,6 +8,116 @@ Track expenses, manage budgets, and gain insights into your spending habits with
 ## Preview
 https://github.com/user-attachments/assets/934c7aa3-cab2-4f59-b2cc-2af524b0b3a5
 
+## Authorization Strategy
+users basic authorization to verify if an user is who he says he is
+every transaction api requires an header Authorization  with value
+Basic user_id:user_email:hashedPassword if every value is a match with the user with user_id
+then the user is deamed valid and access the api
+
+The server uses a custom Basic Authorization mechanism to verify that a user is who they claim to be before allowing access to protected APIs.
+
+### Authorization Header Format
+All transaction-related APIs require an Authorization header with the following format:
+`Authorization: Basic user_id:user_email:hashedPassword`
+Where:
+- user_id — Unique identifier of the user in the database
+- user_email — Email address associated with the user
+- hashedPassword — Stored (hashed) password of the user
+
+### Validation Flow
+- The client sends a request to a protected API endpoint with the Authorization header.
+- The server extracts user_id, user_email, and hashedPassword from the header.
+- The server looks up the user by user_id.
+- The request is considered authorized only if all of the following match the stored user record:
+  - User ID
+  - Email
+  - Hashed password
+- If validation succeeds, the user is treated as authenticated, and the request is allowed to proceed.
+- If any value does not match, the request is rejected with an unauthorized error.
+
+### Scope of Protection
+All transaction-related endpoints require this authorization header.
+Requests without the header or with invalid credentials are denied.
+
+> [!Note]
+> This approach provides identity verification but does not implement session management or
+> token-based authentication. It is intended for simplicity and controlled environments 
+> rather than public-facing production use.
+
+## Future Plan
+- Use JWT Authentication and Authorization insted of this basic authentication model
+- Create Reporting Element on User Dashboard
+- Date wise transactions implementation for transaction
+- Sanitise codebase removing/abstracting duplicate codes
+- user form validation library instead of hand rolled implementation.
+
+
+## Database Schema
+### User Schema
+```java
+public class User {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotBlank
+  @Size(min = 3, max = 20)
+  private String name;
+
+  @NotBlank
+  @Email
+  private String email;
+
+  @NotBlank
+  private String hashedPassword;
+
+  private boolean active;
+
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
+}
+```
+### Transaction Schema
+```java
+public class Transaction {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotBlank
+  private String name;
+
+  private String label;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
+
+  @NotBlank
+  @Column(name = "transaction_category")
+  private String transactionCategory;
+
+  @NotNull
+  @Enumerated(EnumType.STRING)
+  @Column(name = "transaction_type")
+  private TransactionType transactionType;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "transaction_frequency")
+  private TransactionFrequency transactionFrequency;
+
+  @NotNull
+  private BigDecimal amount;
+
+  @NotNull
+  @Column(name = "transaction_date")
+  private LocalDate transactionDate;
+
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
+}
+```
+
 ## Project Structure
 ```
 ├──  apps # Contains all application-level source code for the project.
