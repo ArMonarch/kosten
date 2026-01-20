@@ -5,7 +5,7 @@ Track expenses, manage budgets, and gain insights into your spending habits with
 - FrontEnd -> Typescript(Next.js)
 - BackEnd -> Java(Spring Boot)
 
-> [!NOTE] AI disclaimer
+> [!Note] AI disclaimer
 > while small help was taken to build this app
 > most of the code is written by me and for small code form AI i have carefully
 > reviewed it before using it.
