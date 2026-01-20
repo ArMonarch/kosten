@@ -6,7 +6,8 @@ Track expenses, manage budgets, and gain insights into your spending habits with
 - BackEnd -> Java(Spring Boot)
 
 ## Preview
-https://github.com/user-attachments/assets/934c7aa3-cab2-4f59-b2cc-2af524b0b3a5
+<!-- https://github.com/user-attachments/assets/934c7aa3-cab2-4f59-b2cc-2af524b0b3a5 -->
+https://github.com/user-attachments/assets/41c48086-2cc2-444d-acff-f342799fa73c
 
 ## Authorization Strategy
 users basic authorization to verify if an user is who he says he is
