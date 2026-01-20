@@ -17,6 +17,7 @@ public class ApiResponse<T> {
     this.status = status;
     this.message = message;
     this.data = data;
+    this.timestamp = LocalDateTime.now();
   }
 
   // Getters
