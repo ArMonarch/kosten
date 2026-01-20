@@ -52,6 +52,21 @@ Requests without the header or with invalid credentials are denied.
 - Sanitise codebase removing/abstracting duplicate codes
 - user form validation library instead of hand rolled implementation.
 
+## Backend REST API
+```make
+    POST http://127.0.0.1:8080/api/auth/signin # for sign in
+    POST http://127.0.0.1:8080/api/auth/signup # for sign up
+    GET http://127.0.0.1:8080/api/transaction/get # get all transactions
+    GET http://127.0.0.1:8080/api/transaction/expense/get # get all expense
+    POST http://127.0.0.1:8080/api/transaction/expense/create # create expense
+    GET http://127.0.0.1:8080/api/transaction/expense/total/sum # get expense total amount
+    GET http://127.0.0.1:8080/api/transaction/expense/total/count # get total count of expense
+    GET http://127.0.0.1:8080/api/transaction/income/get # get all income
+    POST http://127.0.0.1:8080/api/transaction/income/create # create income
+    GET http://127.0.0.1:8080/api/transaction/income/total/sum # get income total amount
+    GET http://127.0.0.1:8080/api/transaction/income/total/count # get income count of income
+    DELETE http://127.0.0.1:8080/api/transaction/delete/__id__ # delete transaction with identifier id
+```
 
 ## Database Schema
 ### User Schema
