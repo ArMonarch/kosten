@@ -1,11 +1,9 @@
 package armonarch.kosten.services;
 
 import java.util.Base64;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MissingRequestHeaderException;
 
 import armonarch.kosten.exceptions.UnauthorizedException;
 import armonarch.kosten.exceptions.UserNotFoundException;

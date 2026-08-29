@@ -1,5 +1,5 @@
 {
-  description = "A Nix-flake-based Java Development Environment";
+  description = "A Nix-flake-based Java Development Environment for kosten/server";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -24,8 +24,11 @@
             jdk = pkgs.jdk25;
           in
             with pkgs; [
-              jdk
               postgresql
+              jdk
+              (
+                jdt-language-server.override {jdk = jdk;}
+              )
               (
                 maven.override
                 {jdk_headless = jdk;}
@@ -33,8 +36,8 @@
             ];
           shellHook = ''
             echo "Initialized Java Development Environment"
-            echo "  ├── javac: $(javac --version)"
             echo "  ├── postgres: $(postgres --version)"
+            echo "  ├── javac: $(javac --version)"
             echo "  ├── java:"
             java --version | while read line; do echo "  │   - $line"; done
             echo "  └── maven:"

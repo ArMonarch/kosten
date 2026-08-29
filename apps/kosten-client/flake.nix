@@ -23,6 +23,7 @@
           packages = with pkgs; [
             bun
             nodejs_latest
+            typescript-language-server
           ];
           shellHook = ''
             echo "Initialized JavaScript/TypeScript(feat. Bun) Development Environment"
